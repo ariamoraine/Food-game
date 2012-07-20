@@ -47,10 +47,6 @@ MOVESPEED = 6
 count1 = 0
 count2 = 0
 
-text = basicFont.render('Player1: %s Player2: %s' % (count1, count2), True, BLACK, cornflowerblue)
-textRect = text.get_rect()
-textRect.centerx = windowSurface.get_rect().centerx
-textRect.y = windowSurface.get_rect().y
 
 # run the game loop
 while True:
@@ -136,8 +132,7 @@ while True:
 
     # draw the black background onto the surface
     windowSurface.fill(BLACK)
-    #draw the text
-    windowSurface.blit(text, textRect)
+
     # move the player1
     if moveDown1 and player1.bottom < WINDOWHEIGHT:
         player1.top += MOVESPEED
@@ -162,14 +157,22 @@ while True:
     pygame.draw.rect(windowSurface, cornflowerblue, player1)
     pygame.draw.rect(windowSurface, white, player2)
 
+    text = basicFont.render('Player1: %s Player2: %s' % (count1, count2), True, BLACK, cornflowerblue)
+    textRect = text.get_rect()
+    textRect.centerx = windowSurface.get_rect().centerx
+    textRect.y = windowSurface.get_rect().y
+
+    #draw the text
+    windowSurface.blit(text, textRect)
+
     # check if the players have intersected with any food squares.
     for food in foods[:]:
         if food != None:
             if player1.colliderect(food):
-                count1 = count1 + 1
                 foods.remove(food)
+                count1 = count1 +1
             if player2.colliderect(food):
-                count2 = count2 + 1
+                count2 = count2 +1
                 foods.remove(food)
 
     # draw the food
