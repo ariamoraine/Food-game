@@ -167,13 +167,14 @@ while True:
 
     # check if the players have intersected with any food squares.
     for food in foods[:]:
-        if food != None:
-            if player1.colliderect(food):
+        if player1.colliderect(food):
+            if food != None:
                 foods.remove(food)
                 count1 = count1 +1
-            if player2.colliderect(food):
-                count2 = count2 +1
+        if player2.colliderect(food):
+            if food != None:
                 foods.remove(food)
+                count2 = count2 +1
 
     # draw the food
     for i in range(len(foods)):
