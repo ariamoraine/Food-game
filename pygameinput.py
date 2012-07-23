@@ -22,7 +22,7 @@ white = (255, 255, 255)
 
 # set up the player1 and food data structure
 foodCounter = 0
-NEWFOOD = 10
+NEWFOOD = 30
 FOODSIZE = 20
 player1 = pygame.Rect(300, 100, 50, 50)
 player2 = pygame.Rect(100, 300, 50, 50)
@@ -168,18 +168,22 @@ while True:
     # check if the players have intersected with any food squares.
     for food in foods[:]:
         if player1.colliderect(food):
-            if food != None:
+            try:
                 foods.remove(food)
                 count1 = count1 +1
+            except ValueError:
+                pass
         if player2.colliderect(food):
-            if food != None:
+            try:    
                 foods.remove(food)
                 count2 = count2 +1
+            except ValueError:
+                pass
 
     # draw the food
     for i in range(len(foods)):
         pygame.draw.rect(windowSurface, silver, foods[i])
 
     # draw the window onto the screen
-    pygame.display.update()
+    #pygame.display.update()
     mainClock.tick(40)
